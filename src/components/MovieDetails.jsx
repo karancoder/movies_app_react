@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
     printDate,
     formatMoneyCount,
@@ -36,7 +37,13 @@ const MovieDetails = () => {
     }
 
     return (
-        <div className="movie-details">
+        <motion.div
+            layout
+            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            exit={{ opacity: 0, scale: 0.3 }}
+            className="movie-details"
+        >
             <div className="movie-details-img-container">
                 <img
                     src={
@@ -73,7 +80,7 @@ const MovieDetails = () => {
                     {movieDetails.overview}
                 </p>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

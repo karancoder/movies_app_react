@@ -1,29 +1,33 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import "./../styles/SearchBar.css";
 import MoviesGrid from "./MoviesGrid";
 
-const PopularMovies = () => {
-    const [popularMovies, setPopularMovies] = useState([]);
+const SearchResults = () => {
+    let { id } = useParams();
+    const [searchMovies, setSearchMovies] = useState([]);
     const [pagesLoaded, setPagesLoaded] = useState(0);
     const [canLoadMoreMovies, setCanLoadMoreMovies] = useState(false);
 
     useEffect(() => {
-        fetchPopularMovies();
-    }, []);
+        fetchSearchMovies();
+    }, [id]);
 
-    const fetchPopularMovies = async () => {
+    const fetchSearchMovies = async () => {
         const data = await fetch(
-            `https://api.themoviedb.org/3/movie/popular?api_key=${
+            `https://api.themoviedb.org/3/search/movie?api_key=${
                 process.env.REACT_APP_MOVIES_DB_API_KEY
-            }&language=en-US&page=${pagesLoaded + 1}`
+            }&language=en-US&query=${id}&page=${
+                pagesLoaded + 1
+            }&include_adult=false&`
         );
         const movies = await data.json();
         console.log(movies);
-        setPopularMovies((_prevPopularMovies) => {
-            if (pagesLoaded > 0) {
-                return _prevPopularMovies.concat(movies.results);
+        setSearchMovies((_prevSearchMovies) => {
+            if (pagesLoaded) {
+                return _prevSearchMovies.concat(movies.results);
             }
             return movies.results;
         });
@@ -37,13 +41,13 @@ const PopularMovies = () => {
         <>
             <SearchBar />
             <MoviesGrid
-                movies={popularMovies}
-                heading="Popular Movies"
-                fetchMoreMovies={fetchPopularMovies}
+                movies={searchMovies}
+                heading={`Searched: ${id}`}
+                fetchMoreMovies={fetchSearchMovies}
                 canLoadMoreMovies={canLoadMoreMovies}
             />
         </>
     );
 };
 
-export default PopularMovies;
+export default SearchResults;
