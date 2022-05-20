@@ -1,6 +1,6 @@
 # Live Demo
 
-https://github.com/karancoder/movies_app_react
+[https://karancoder.github.io/movies_app_react/](https://karancoder.github.io/movies_app_react/)
 
 # Getting Started with Create React App
 
