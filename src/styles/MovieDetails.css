@@ -33,6 +33,10 @@
     font-weight: bold;
 }
 
+.movie-details-number-items.genres {
+    grid-column: 1 / span 2;
+}
+
 .movie-details-numbers {
     margin: 0;
     padding: 0.5rem 0;

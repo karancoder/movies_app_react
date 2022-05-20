@@ -24,7 +24,7 @@ const Filters = ({ activeGenre, setActiveGenre, setFiltered, movies }) => {
             newFiltered = movies;
         }
         setFiltered((_prevFiltered) => newFiltered);
-    }, [activeGenre]);
+    }, [activeGenre, movies]);
 
     useEffect(() => {
         fetchGenreMap();

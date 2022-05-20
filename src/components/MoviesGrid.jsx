@@ -15,9 +15,14 @@ const MoviesGrid = ({
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [activeGenre, setActiveGenre] = useState(0);
     useEffect(() => {
-        setFilteredMovies((_prevFilteredMovies) => movies);
+        setFilteredMovies((_prevFilteredMovies) => {
+            if (_prevFilteredMovies !== []) {
+                return _prevFilteredMovies;
+            }
+            return movies;
+        });
     }, [movies]);
-    const loadMoreMovies = (event) => {
+    const loadMoreMovies = (_) => {
         fetchMoreMovies();
     };
     return (

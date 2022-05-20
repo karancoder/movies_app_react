@@ -75,6 +75,15 @@ const MovieDetails = () => {
                         <span>Runtime: </span>
                         {printTime(movieDetails.runtime)} mins
                     </div>
+                    <div className="movie-details-number-items genres">
+                        <span>Genres: </span>
+                        {movieDetails["genres"].map((genre, i) => {
+                            if (i !== movieDetails["genres"].length - 1) {
+                                return genre.name + ", ";
+                            }
+                            return genre.name;
+                        })}
+                    </div>
                 </div>
                 <p className="movie-detail-description">
                     {movieDetails.overview}
